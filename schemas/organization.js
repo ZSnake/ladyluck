@@ -1,0 +1,40 @@
+var mongoose = require('mongoose');
+
+var OrganizationSchema = new mongoose.Schema({
+  orgNumber: Number, 	
+  photo: String,	
+  orgName: String,	
+  acronym: String,	
+  postal: String,	
+  department: String,	
+  municipality: String,	
+  village: String,
+  community: String,	
+  sector: String,	
+  mission: String,	
+  vision: String,	
+  market: String,	
+  webPage: String,	
+  orgPhone: String,	
+  orgCelPhone: String,
+  orgSocialNetwork: String,	
+  orgEmail: String,	
+  directorName: String,	
+  directorEmail: String,
+  directorPhone: String,	
+  directorCelPhone: String,	
+  orgResolutionNumber: String, 	
+  orgResolutionDate: Date, 	
+  legalRepresentativeName: String,	
+  ursacRegistrationNumber: String,
+  ursacrRegistrationDate: String,
+  latitude: String,
+  longitude: String,	
+  intervieweeName: String, 	
+  interviewDate: Date, 	
+  interviewTime: Date,	
+  otherOrgsInRegion: String	,
+  observations: String
+});
+
+module.exports = mongoose.model('Organization', OrganizationSchema);
