@@ -1,4 +1,5 @@
 var organization = require('../schemas/organization');
+var boom = require('boom');
 
 exports.getOrganizations = {
   auth: {
@@ -17,7 +18,6 @@ exports.createOrganization = {
     strategy:'session',
   },
   handler: function(request, reply){
-    console.log(request.payload.observations);
     var newOrganization = new organization({
           orgNumber : request.payload.orgNumber, 	
           photo : request.payload.photo,	
@@ -54,16 +54,11 @@ exports.createOrganization = {
           otherOrgsInRegion: request.payload.otherOrgsInRegion,
           observations: request.payload.observations
       });
-      
-    //console.log(newOrganization);
-    
-    newOrganization.save(function(err){
+    newOrganization.save(function(err, organization){
       if(!err)
-        console.log('organization saved');
-      else
-        console.log(err);
+        return reply(organization);
+      else  
+        boom.badRequest('Invalid query. Organization not created: ', err);
     });
-    
-    return reply('ok');
   }
 }
