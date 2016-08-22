@@ -27,12 +27,12 @@ var OrganizationSchema = new mongoose.Schema({
   orgResolutionDate: Date, 	
   legalRepresentativeName: String,	
   ursacRegistrationNumber: String,
-  ursacrRegistrationDate: String,
+  ursacrRegistrationDate: Date,
   latitude: String,
   longitude: String,	
   intervieweeName: String, 	
   interviewDate: Date, 	
-  interviewTime: Date,	
+  interviewTime: String,	
   otherOrgsInRegion: String	,
   observations: String
 });

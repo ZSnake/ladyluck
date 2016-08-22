@@ -2,10 +2,6 @@ var organization = require('../schemas/organization');
 var boom = require('boom');
 
 exports.getOrganizations = {
-  auth: {
-    mode:'required',
-    strategy:'session',
-  },
   handler: function(request, reply){
     var organizations = organization.find({});
     reply(organizations);
@@ -13,10 +9,6 @@ exports.getOrganizations = {
 }
 
 exports.createOrganization = {
-  auth: {
-    mode:'required',
-    strategy:'session',
-  },
   handler: function(request, reply){
     var newOrganization = new organization({
           orgNumber : request.payload.orgNumber, 	
@@ -45,7 +37,7 @@ exports.createOrganization = {
           orgResolutionDate: request.payload.orgResolutionDate, 	
           legalRepresentativeName: request.payload.legalRepresentativeName,	
           ursacRegistrationNumber: request.payload.ursacRegistrationNumber,
-          ursacrRegistrationDate: request.payload.ursacrRegistrationDate,
+          ursacRegistrationDate: request.payload.ursacrRegistrationDate,
           latitude: request.payload.latitude,
           longitude: request.payload.longitude,	
           intervieweeName: request.payload.intervieweeName, 	
