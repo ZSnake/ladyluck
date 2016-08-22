@@ -5,13 +5,11 @@ var routes = require('./routes');
 var auth = require('hapi-auth-cookie');
 var config = require('./config')
 var server = new hapi.Server();
+var https = require('hapi-require-https');
+
 server.connection({
     port: ~~process.env.PORT || 8000,
-    routes: { cors: {
-                    credentials: true,
-                    origin: ["*"]
-                }
-              }
+    routes: { cors: true}
 });
 
 mongoose.connect(process.env.database);
@@ -22,7 +20,7 @@ db.once('open', function callback() {
     console.log("Connection with database succeeded.");
 });
 
-server.register([inert, auth], function(err){
+server.register([inert, auth, https], function(err){
 
   server.auth.strategy('session', 'cookie', {
     password: 'secretpasswordforencryption',
