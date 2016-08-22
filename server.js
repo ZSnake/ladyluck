@@ -14,7 +14,6 @@ server.connection({
               }
 });
 
-console.log("Database", process.env.database);
 mongoose.connect(process.env.database ? ~~process.env.database : 'localhost:27017/ladyluck');
 
 var db = mongoose.connection;
@@ -35,6 +34,7 @@ server.register([inert, auth], function(err){
 	server.route(routes.endpoints);
 
 	server.start(function () {
+        console.log("Database", process.env.database);
 	    console.log('Server running at:', server.info.uri);
 	});
 });
