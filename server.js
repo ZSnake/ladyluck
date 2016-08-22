@@ -14,7 +14,7 @@ server.connection({
               }
 });
 
-mongoose.connect(config.databaseUrl());
+mongoose.connect(process.env.database);
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error'));
