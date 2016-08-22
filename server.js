@@ -14,6 +14,7 @@ server.connection({
               }
 });
 
+console.log(~~process.env.database);
 mongoose.connect(~~process.env.database ? ~~process.env.database : 'localhost:27017/ladyluck');
 
 var db = mongoose.connection;
