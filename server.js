@@ -14,7 +14,7 @@ server.connection({
               }
 });
 
-mongoose.connect('localhost:27017/ladyluck');
+mongoose.connect(~~process.env.database || 'localhost:27017/ladyluck');
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error'));
