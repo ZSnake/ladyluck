@@ -3,7 +3,7 @@ var inert = require('inert');
 var mongoose = require('mongoose');
 var routes = require('./routes');
 var auth = require('hapi-auth-cookie');
-
+var config = require('./config')
 var server = new hapi.Server();
 server.connection({
     port: ~~process.env.PORT || 8000,
@@ -14,7 +14,7 @@ server.connection({
               }
 });
 
-mongoose.connect(process.env.database ? ~~process.env.database : 'localhost:27017/ladyluck');
+mongoose.connect(config.databaseUrl());
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error'));
