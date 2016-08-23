@@ -49,8 +49,9 @@ exports.createOrganization = {
       });
     newOrganization.save(function(err, organization){
       if(!err){
+        console.log(request.payload.projects);
         if(request.payload.projects){
-          request.payload.projects.foreach(function(p){
+          request.payload.projects.forEach(function(p){
             var newProject = new project({
               projectNumber: p.projectNumber ,	
               organizationId: organization._id,	
@@ -99,10 +100,13 @@ exports.createOrganization = {
               if(err){
                 console.log("Error saving project");
                 boom.badRequest('Invalid query. Error saving project: ' + newProject.name, err);
+              }else{
+                console.log("saving: ", newProject);
               }
             });
           });
         }
+        return reply(organization);
       }
       else  
         boom.badRequest('Invalid query. Organization not created: ', err);
