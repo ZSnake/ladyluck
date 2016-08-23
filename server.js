@@ -12,7 +12,7 @@ server.connection({
     routes: { cors: true}
 });
 
-mongoose.connect(process.env.database);
+mongoose.connect(process.env.database || "mongo://localhost:27017");
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error'));

@@ -1,4 +1,5 @@
 var organization = require('../schemas/organization');
+var project = require('../schemas/project');
 var boom = require('boom');
 
 exports.getOrganizations = {
@@ -47,8 +48,62 @@ exports.createOrganization = {
           observations: request.payload.observations
       });
     newOrganization.save(function(err, organization){
-      if(!err)
-        return reply(organization);
+      if(!err){
+        if(request.payload.projects){
+          request.payload.projects.foreach(function(p){
+            var newProject = new project({
+              projectNumber: p.projectNumber ,	
+              organizationId: organization._id,	
+              name: p.name, 
+              description: p.description,	
+              duration: p.duration,
+              scope: p.scope,	
+              childrenProfile: p.childrenProfile,	
+              ages: p.ages,
+              totalSpace: p.totalSpace,	
+              availableSpace: p.availableSpace,	
+              coordinatorName: p.coordinatorName,	
+              coordinatorPhone: p.coordinatorPhone,	
+              coordinatorEmail: p.coordinatorEmail,
+              coordinatorCelPhone: p.coordinatorCelPhone,
+              postalCode: p.postalCode,
+              department: p.department,
+              observations: p.observations,
+              abandonment: p.abandonment,	
+              legalRepresentativeAbsence: p.legalRepresentativeAbsence,	
+              abuseBySupression: p.abuseBySupression,	
+              abuseByTransgression: p.abuseByTransgression,	
+              lackOfBasicNeeds: p.lackOfBasicNeeds,	
+              threatToHeritage: p.threatToHeritage,	
+              addiction: p.addiction,	
+              sexualFreedomVictims: p.sexualFreedomVictims,	
+              sexualHarassmentVictims: p.sexualHarassmentVictims,	
+              procuring: p.procuring,	
+              trafficking: p.trafficking, 	
+              publicSexualExposure: p.publicSexualExposure,	
+              pornography: p.pornography,
+              sexualTurism: p.sexualTurism,	
+              criminalRecruitmentRisk: p.criminalRecruitmentRisk,	
+              begging: p.begging,	
+              economicExploitation: p.economicExploitation,	
+              childAbduction: p.childAbduction,	
+              childrenDinning: p.childrenDinning,	
+              preBasicEducationCenter: p.preBasicEducationCenter,	
+              sportEducationCenter: p.sportEducationCenter,	
+              alternativeEducationCenter: Boolean,	
+              initialEducationAndEarlyEstimulationCenter: p.initialEducationAndEarlyEstimulationCenter,	
+              artisticFormationCenter: p.artisticFormationCenter,
+              others: p.others
+            });
+            newProject.save(function(err){
+              if(err){
+                console.log("Error saving project");
+                boom.badRequest('Invalid query. Error saving project: ' + newProject.name, err);
+              }
+            });
+          });
+        }
+      }
       else  
         boom.badRequest('Invalid query. Organization not created: ', err);
     });
