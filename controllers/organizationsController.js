@@ -49,7 +49,6 @@ exports.createOrganization = {
       });
     newOrganization.save(function(err, organization){
       if(!err){
-        console.log(request.payload.projects);
         if(request.payload.projects){
           request.payload.projects.forEach(function(p){
             var newProject = new project({
@@ -72,6 +71,7 @@ exports.createOrganization = {
               observations: p.observations,
               abandonment: p.abandonment,	
               legalRepresentativeAbsence: p.legalRepresentativeAbsence,	
+              abuseByOmission: p.abuseByOmission,
               abuseBySupression: p.abuseBySupression,	
               abuseByTransgression: p.abuseByTransgression,	
               lackOfBasicNeeds: p.lackOfBasicNeeds,	
@@ -94,14 +94,13 @@ exports.createOrganization = {
               alternativeEducationCenter: Boolean,	
               initialEducationAndEarlyEstimulationCenter: p.initialEducationAndEarlyEstimulationCenter,	
               artisticFormationCenter: p.artisticFormationCenter,
+              vocationalEducationCenter: p.vocationalEducationCenter,
               others: p.others
             });
             newProject.save(function(err){
               if(err){
                 console.log("Error saving project");
                 boom.badRequest('Invalid query. Error saving project: ' + newProject.name, err);
-              }else{
-                console.log("saving: ", newProject);
               }
             });
           });
