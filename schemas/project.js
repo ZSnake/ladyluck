@@ -1,16 +1,16 @@
 var mongoose = require('mongoose');
 
 var ProjectSchema = new mongoose.Schema({
-    projectNumber: Number ,	
+    projectNumber: String ,	
     organizationId: String,	
     name: String, 
     description: String,	
-    duration: Number,
+    duration: String,
     scope: String,	
     childrenProfile: String,	
     ages: String,
-    totalSpace: Number,	
-    availableSpace: Number,	
+    totalSpace: String,	
+    availableSpace: String,	
     coordinatorName: String,	
     coordinatorPhone: String,	
     coordinatorEmail: String,
