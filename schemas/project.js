@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var ProjectSchema = new mongoose.Schema({
-    projectNumber: Number ,	
+    projectNumber: String ,	
     organizationId: String,	
     name: String, 
     description: String,	
