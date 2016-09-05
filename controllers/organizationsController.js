@@ -9,44 +9,98 @@ exports.getOrganizations = {
   }
 }
 
+
+exports.editOrganization = {
+  handler: function(request, reply){
+    organization.update({_id:request.params.organizationId}, {$set:{
+      orgNumber : request.payload.orgNumber,  
+      photo : request.payload.photo,  
+      orgName: request.payload.orgName, 
+      acronym: request.payload.acronym, 
+      postal: request.payload.postal, 
+      department: request.payload.department, 
+      municipality: request.payload.municipality, 
+      village: request.payload.village,
+      community: request.payload.community, 
+      sector: request.payload.sector, 
+      mission: request.payload.mission, 
+      vision: request.payload.vision, 
+      market: request.payload.market, 
+      webPage: request.payload.webPage, 
+      orgPhone: request.payload.orgPhone, 
+      orgCelPhone: request.payload.orgCelPhone,
+      orgSocialNetwork: request.payload.orgSocialNetwork, 
+      orgEmail: request.payload.orgEmail, 
+      directorName: request.payload.directorName, 
+      directorEmail: request.payload.directorEmail,
+      directorPhone: request.payload.directorPhone, 
+      directorCelPhone: request.payload.directorCelPhone, 
+      orgResolutionNumber: request.payload.orgResolutionNumber,   
+      orgResolutionDate: request.payload.orgResolutionDate,   
+      legalRepresentativeName: request.payload.legalRepresentativeName, 
+      ursacRegistrationNumber: request.payload.ursacRegistrationNumber,
+      ursacRegistrationDate: request.payload.ursacrRegistrationDate,
+      latitude: request.payload.latitude,
+      longitude: request.payload.longitude, 
+      intervieweeName: request.payload.intervieweeName,   
+      interviewDate: request.payload.interviewDate,   
+      interviewTime: request.payload.interviewTime, 
+      otherOrgsInRegion: request.payload.otherOrgsInRegion,
+      observations: request.payload.observations
+    }},function(error) {
+      if(error){
+        boom.badRequest('Error updating project: ' + err);
+      }
+      return reply('ok');
+    });
+  }
+}
+
+exports.getOrganizationById = {
+  handler: function(request, reply) {
+    var Organization = organization.find({_id:request.params.organizationId})
+    return reply(Organization);
+  }
+}
+
 exports.createOrganization = {
   handler: function(request, reply){
     var newOrganization = new organization({
-          orgNumber : request.payload.orgNumber, 	
-          photo : request.payload.photo,	
-          orgName: request.payload.orgName,	
-          acronym: request.payload.acronym,	
-          postal: request.payload.postal,	
-          department: request.payload.department,	
-          municipality: request.payload.municipality,	
-          village: request.payload.village,
-          community: request.payload.community,	
-          sector: request.payload.sector,	
-          mission: request.payload.mission,	
-          vision: request.payload.vision,	
-          market: request.payload.market,	
-          webPage: request.payload.webPage,	
-          orgPhone: request.payload.orgPhone,	
-          orgCelPhone: request.payload.orgCelPhone,
-          orgSocialNetwork: request.payload.orgSocialNetwork,	
-          orgEmail: request.payload.orgEmail,	
-          directorName: request.payload.directorName,	
-          directorEmail: request.payload.directorEmail,
-          directorPhone: request.payload.directorPhone,	
-          directorCelPhone: request.payload.directorCelPhone,	
-          orgResolutionNumber: request.payload.orgResolutionNumber, 	
-          orgResolutionDate: request.payload.orgResolutionDate, 	
-          legalRepresentativeName: request.payload.legalRepresentativeName,	
-          ursacRegistrationNumber: request.payload.ursacRegistrationNumber,
-          ursacRegistrationDate: request.payload.ursacrRegistrationDate,
-          latitude: request.payload.latitude,
-          longitude: request.payload.longitude,	
-          intervieweeName: request.payload.intervieweeName, 	
-          interviewDate: request.payload.interviewDate, 	
-          interviewTime: request.payload.interviewTime,	
-          otherOrgsInRegion: request.payload.otherOrgsInRegion,
-          observations: request.payload.observations
-      });
+      orgNumber : request.payload.orgNumber, 	
+      photo : request.payload.photo,	
+      orgName: request.payload.orgName,	
+      acronym: request.payload.acronym,	
+      postal: request.payload.postal,	
+      department: request.payload.department,	
+      municipality: request.payload.municipality,	
+      village: request.payload.village,
+      community: request.payload.community,	
+      sector: request.payload.sector,	
+      mission: request.payload.mission,	
+      vision: request.payload.vision,	
+      market: request.payload.market,	
+      webPage: request.payload.webPage,	
+      orgPhone: request.payload.orgPhone,	
+      orgCelPhone: request.payload.orgCelPhone,
+      orgSocialNetwork: request.payload.orgSocialNetwork,	
+      orgEmail: request.payload.orgEmail,	
+      directorName: request.payload.directorName,	
+      directorEmail: request.payload.directorEmail,
+      directorPhone: request.payload.directorPhone,	
+      directorCelPhone: request.payload.directorCelPhone,	
+      orgResolutionNumber: request.payload.orgResolutionNumber, 	
+      orgResolutionDate: request.payload.orgResolutionDate, 	
+      legalRepresentativeName: request.payload.legalRepresentativeName,	
+      ursacRegistrationNumber: request.payload.ursacRegistrationNumber,
+      ursacRegistrationDate: request.payload.ursacrRegistrationDate,
+      latitude: request.payload.latitude,
+      longitude: request.payload.longitude,	
+      intervieweeName: request.payload.intervieweeName, 	
+      interviewDate: request.payload.interviewDate, 	
+      interviewTime: request.payload.interviewTime,	
+      otherOrgsInRegion: request.payload.otherOrgsInRegion,
+      observations: request.payload.observations
+    });
     newOrganization.save(function(err, organization){
       if(!err){
         if(request.payload.projects){
