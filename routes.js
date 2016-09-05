@@ -7,7 +7,9 @@ exports.endpoints = [{method: 'GET', path: '/', config: {handler: function(reque
 //	{method: 'PUT', path: '/v1/organizations', config: organizationsController.updateOrganizations},
 	{method: 'PUT', path: '/v1/organization/{organizationId}', config: organizationsController.editOrganization},
 	{method: 'GET', path: '/v1/organization/{organizationId}', config: organizationsController.getOrganizationById},
-	{method: 'GET', path: '/v1/organization/projects/{organizationId}', config: projectsController.getProjects},
+	{method: 'GET', path: '/v1/organization/{organizationId}/projects/', config: projectsController.getProjects},
+	{method: 'PUT', path: '/v1/organization/{organizationId}/project/{projectId}', config: projectsController.editProject},
+	{method: 'GET', path: '/v1/organization/{organizationId}/project/{projectId}', config: projectsController.getProjectsById},//get para editar un projecto
 	{method: 'GET', path: '/v1/organizations', config: organizationsController.getOrganizations},
     {method: 'POST', path: '/v1/organization', config: organizationsController.createOrganization},
 	{method: 'POST', path: '/v1/register', config: usersController.createUser},

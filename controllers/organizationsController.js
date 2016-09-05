@@ -56,7 +56,7 @@ exports.editOrganization = {
   }
 }
 
-exports.getOrganizationById = {
+exports.getOrganizationById = { //takes only one element by id
   handler: function(request, reply) {
     var Organization = organization.find({_id:request.params.organizationId})
     return reply(Organization);
