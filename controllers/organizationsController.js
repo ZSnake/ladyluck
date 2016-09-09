@@ -12,6 +12,7 @@ exports.getOrganizations = {
 
 exports.editOrganization = {
   handler: function(request, reply){
+    console.log(request.payload.ursacRegistrationDate);
     organization.update({_id:request.params.organizationId}, {$set:{
       orgNumber : request.payload.orgNumber,  
       photo : request.payload.photo,  
@@ -39,7 +40,7 @@ exports.editOrganization = {
       orgResolutionDate: request.payload.orgResolutionDate,   
       legalRepresentativeName: request.payload.legalRepresentativeName, 
       ursacRegistrationNumber: request.payload.ursacRegistrationNumber,
-      ursacrRegistrationDate: request.payload.ursacrRegistrationDate,
+      ursacRegistrationDate: request.payload.ursacRegistrationDate,
       latitude: request.payload.latitude,
       longitude: request.payload.longitude, 
       intervieweeName: request.payload.intervieweeName,   
@@ -65,6 +66,7 @@ exports.getOrganizationById = { //takes only one element by id
 
 exports.createOrganization = {
   handler: function(request, reply){
+    console.log(request.payload.ursacRegistrationDate);
     var newOrganization = new organization({
       orgNumber : request.payload.orgNumber, 	
       photo : request.payload.photo,	
@@ -92,7 +94,7 @@ exports.createOrganization = {
       orgResolutionDate: request.payload.orgResolutionDate, 	
       legalRepresentativeName: request.payload.legalRepresentativeName,	
       ursacRegistrationNumber: request.payload.ursacRegistrationNumber,
-      ursacrRegistrationDate: request.payload.ursacrRegistrationDate,
+      ursacRegistrationDate: request.payload.ursacRegistrationDate,
       latitude: request.payload.latitude,
       longitude: request.payload.longitude,	
       intervieweeName: request.payload.intervieweeName, 	
