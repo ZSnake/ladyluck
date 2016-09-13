@@ -27,7 +27,7 @@ var OrganizationSchema = new mongoose.Schema({
   orgResolutionDate: Date, 	
   legalRepresentativeName: String,	
   ursacRegistrationNumber: String,
-  ursacrRegistrationDate: Date,
+  ursacRegistrationDate: Date,
   latitude: String,
   longitude: String,	
   intervieweeName: String, 	
