@@ -12,6 +12,7 @@ exports.getOrganizations = {
 
 exports.editOrganization = {
   handler: function(request, reply){
+
     organization.update({_id:request.params.organizationId}, {$set:{
       orgNumber : request.payload.orgNumber,  
       photo : request.payload.photo,  
@@ -39,7 +40,7 @@ exports.editOrganization = {
       orgResolutionDate: request.payload.orgResolutionDate,   
       legalRepresentativeName: request.payload.legalRepresentativeName, 
       ursacRegistrationNumber: request.payload.ursacRegistrationNumber,
-      ursacRegistrationDate: request.payload.ursacrRegistrationDate,
+      ursacRegistrationDate: request.payload.ursacRegistrationDate,
       latitude: request.payload.latitude,
       longitude: request.payload.longitude, 
       intervieweeName: request.payload.intervieweeName,   
@@ -50,10 +51,68 @@ exports.editOrganization = {
     }},function(error) {
       if(error){
         boom.badRequest('Error updating project: ' + err);
+      } else {
+        if(request.payload.projects){
+          request.payload.projects.forEach(function(p){
+            var newProject = new project({
+              projectNumber: p.projectNumber ,  
+              organizationId: request.params.organizationId, 
+              name: p.name, 
+              description: p.description, 
+              duration: p.duration,
+              scope: p.scope, 
+              childrenProfile: p.childrenProfile, 
+              ages: p.ages,
+              totalSpace: p.totalSpace, 
+              availableSpace: p.availableSpace, 
+              coordinatorName: p.coordinatorName, 
+              coordinatorPhone: p.coordinatorPhone, 
+              coordinatorEmail: p.coordinatorEmail,
+              coordinatorCelPhone: p.coordinatorCelPhone,
+              postalCode: p.postalCode,
+              department: p.department,
+              observations: p.observations,
+              abandonment: p.abandonment, 
+              legalRepresentativeAbsence: p.legalRepresentativeAbsence, 
+              abuseByOmission: p.abuseByOmission,
+              abuseBySupression: p.abuseBySupression, 
+              abuseByTransgression: p.abuseByTransgression, 
+              lackOfBasicNeeds: p.lackOfBasicNeeds, 
+              threatToHeritage: p.threatToHeritage, 
+              addiction: p.addiction, 
+              sexualFreedomVictims: p.sexualFreedomVictims, 
+              sexualHarassmentVictims: p.sexualHarassmentVictims, 
+              procuring: p.procuring, 
+              trafficking: p.trafficking,   
+              publicSexualExposure: p.publicSexualExposure, 
+              pornography: p.pornography,
+              sexualTurism: p.sexualTurism, 
+              criminalRecruitmentRisk: p.criminalRecruitmentRisk, 
+              begging: p.begging, 
+              economicExploitation: p.economicExploitation, 
+              childAbduction: p.childAbduction, 
+              childrenDinning: p.childrenDinning, 
+              preBasicEducationCenter: p.preBasicEducationCenter, 
+              sportEducationCenter: p.sportEducationCenter, 
+              alternativeEducationCenter: Boolean,  
+              initialEducationAndEarlyEstimulationCenter: p.initialEducationAndEarlyEstimulationCenter, 
+              artisticFormationCenter: p.artisticFormationCenter,
+              vocationalEducationCenter: p.vocationalEducationCenter,
+              others: p.others
+            });
+            newProject.save(function(err){
+              if(err){
+                console.log("Error saving project");
+                boom.badRequest('Invalid query. Error saving project: ' + newProject.name, err);
+              }
+            });
+          });
+        }
+
       }
       return reply('ok');
     });
-  }
+}
 }
 
 exports.getOrganizationById = { //takes only one element by id
@@ -65,6 +124,7 @@ exports.getOrganizationById = { //takes only one element by id
 
 exports.createOrganization = {
   handler: function(request, reply){
+
     var newOrganization = new organization({
       orgNumber : request.payload.orgNumber, 	
       photo : request.payload.photo,	
@@ -92,7 +152,7 @@ exports.createOrganization = {
       orgResolutionDate: request.payload.orgResolutionDate, 	
       legalRepresentativeName: request.payload.legalRepresentativeName,	
       ursacRegistrationNumber: request.payload.ursacRegistrationNumber,
-      ursacRegistrationDate: request.payload.ursacrRegistrationDate,
+      ursacRegistrationDate: request.payload.ursacRegistrationDate,
       latitude: request.payload.latitude,
       longitude: request.payload.longitude,	
       intervieweeName: request.payload.intervieweeName, 	
