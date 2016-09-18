@@ -13,7 +13,8 @@ exports.endpoints = [{method: 'GET', path: '/', config: {handler: function(reque
 	{method: 'GET', path: '/v1/organization/{organizationId}/project/{projectId}', config: projectsController.getProjectsById},//get para editar un projecto
 	{method: 'GET', path: '/v1/organizations', config: organizationsController.getOrganizations},
     {method: 'POST', path: '/v1/organization', config: organizationsController.createOrganization},
-	{method: 'POST', path: '/v1/register', config: usersController.createUser},
+	{method: 'POST', path: '/v1/createUser', config: usersController.createUser},
 	{method: 'POST', path: '/v1/login', config: authController.login},
-	{method: 'GET', path: '/v1/logout', config: authController.logout}
+	{method: 'GET', path: '/v1/logout', config: authController.logout},
+	{method: 'GET', path: '/v1/userRole/{userId}', config: usersController.getPermissions}
 ];
