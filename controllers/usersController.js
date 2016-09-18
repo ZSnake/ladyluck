@@ -5,7 +5,8 @@ var boom = require('boom');
 exports.createUser = {
     auth: {
       mode:'try',
-      strategy:'session'
+      strategy:'session',
+      scope: ['admin']
     },
     handler: function(request, reply) {
       console.log(request.payload);

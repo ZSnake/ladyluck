@@ -29,7 +29,8 @@ exports.login = {
 exports.logout = {
     auth: {
       mode:'required',
-      strategy:'session'
+      strategy:'session',
+      scope: ['admin', 'orgUser']
     },
     handler: function(request, reply) {
       request.cookieAuth.clear();

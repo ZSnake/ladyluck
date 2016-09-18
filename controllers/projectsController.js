@@ -3,6 +3,7 @@ var boom = require('boom');
 
 
 exports.getProjects = {
+	auth: false,
 	handler: function(request, reply){
 		var projects = project.find({organizationId : request.params.organizationId});
 		reply(projects);
@@ -10,6 +11,7 @@ exports.getProjects = {
 }
 
 exports.getProjectsById = {
+	auth: false,
 	handler: function (request, reply) {
 		var Project = project.find({_id:request.params.projectId})
 		return reply(Project)
@@ -18,6 +20,11 @@ exports.getProjectsById = {
 }
 
 exports.editProject = {
+	auth: {
+      mode:'required',
+      strategy:'session',
+      scope: ['admin']
+  },
 	handler: function(request, reply) {
 		project.update({_id:request.params.projectId},{$set:{
 			projectNumber : request.payload.projectNumber,	

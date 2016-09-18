@@ -3,6 +3,7 @@ var project = require('../schemas/project');
 var boom = require('boom');
 
 exports.getOrganizations = {
+  auth: false,
   handler: function(request, reply){
     var organizations = organization.find({});
     reply(organizations);
@@ -11,8 +12,12 @@ exports.getOrganizations = {
 
 
 exports.editOrganization = {
+  auth: {
+      mode:'required',
+      strategy:'session',
+      scope: ['admin']
+  },
   handler: function(request, reply){
-
     organization.update({_id:request.params.organizationId}, {$set:{
       orgNumber : request.payload.orgNumber,  
       photo : request.payload.photo,  
@@ -123,6 +128,11 @@ exports.getOrganizationById = { //takes only one element by id
 }
 
 exports.createOrganization = {
+  auth: {
+      mode:'required',
+      strategy:'session',
+      scope: ['admin', 'orgUser']
+  },
   handler: function(request, reply){
 
     var newOrganization = new organization({
