@@ -24,21 +24,18 @@ exports.createUser = {
     }
   };
 
-  exports.getPermissions = {
+  exports.getUsers = {
     auth: {
       mode: 'try',
       strategy: 'session',
       scope: ['admin', 'orgUser']
     },
     handler: function(request, reply){
-      var currentUser = {}
-      user.find({_id: request.params.userId}, function(err, result){
+      user.find({}, 'username _id scope', function(err, result){
         if(err){
           boom.notAcceptable('User not found');
         }
-        console.log(result);
-        currentUser = result[0];
-        reply(currentUser.scope);
+        reply(result);
       });
     }
   }
