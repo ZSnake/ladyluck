@@ -28,7 +28,7 @@ exports.createUser = {
     auth: {
       mode: 'try',
       strategy: 'session',
-      scope: ['admin', 'orgUser']
+      scope: ['admin']
     },
     handler: function(request, reply){
       user.find({}, 'username _id scope', function(err, result){
@@ -36,6 +36,21 @@ exports.createUser = {
           boom.notAcceptable('User not found');
         }
         reply(result);
+      });
+    }
+  }
+
+  exports.deleteUser = {
+    auth: {
+      mode: 'try',
+      strategy: 'session',
+      scope: ['admin']
+    },
+    handler: function(request, reply){
+      user.remove({_id: request.params.userId}, function(err){
+        if(err)
+          boom.notAcceptable('User could not be deleted ' + err);
+        reply('user removed');
       });
     }
   }

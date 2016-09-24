@@ -16,5 +16,6 @@ exports.endpoints = [{method: 'GET', path: '/', config: {handler: function(reque
 	{method: 'POST', path: '/v1/createUser', config: usersController.createUser},
 	{method: 'POST', path: '/v1/login', config: authController.login},
 	{method: 'GET', path: '/v1/logout', config: authController.logout},
-	{method: 'GET', path: '/v1/users', config: usersController.getUsers}
+	{method: 'GET', path: '/v1/users', config: usersController.getUsers},
+	{method: 'DELETE', path: '/v1/user/{userId}', config: usersController.deleteUser}
 ];
