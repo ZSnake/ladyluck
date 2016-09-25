@@ -5,7 +5,6 @@ var projectsController = require('./controllers/projectsController');
 
 exports.endpoints = [{method: 'GET', path: '/', config: {handler: function(request, reply){reply('API v1, DINAF')}}},
 //	{method: 'PUT', path: '/v1/organizations', config: organizationsController.updateOrganizations},
-	
 	{method: 'PUT', path: '/v1/organization/{organizationId}', config: organizationsController.editOrganization},
 	{method: 'GET', path: '/v1/organization/{organizationId}', config: organizationsController.getOrganizationById},
 	{method: 'GET', path: '/v1/organization/{organizationId}/projects/', config: projectsController.getProjects},

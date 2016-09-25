@@ -9,7 +9,7 @@ var https = require('hapi-require-https');
 
 server.connection({
     port: ~~process.env.PORT || 8000,
-    routes: { cors: true}
+    routes: { cors: true }
 });
 
 mongoose.connect(process.env.database ? process.env.database : "mongodb://localhost:27017/ladyluck");
