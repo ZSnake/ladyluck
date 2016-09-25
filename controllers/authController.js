@@ -14,10 +14,8 @@ exports.login = {
     handler: function(request, reply) {
       var password = String(SHA3(request.payload.password));
       user.find({username: request.payload.username, password: password}, function(err, user){
-          console.log(password)
           if(!err){
             if(user.length > 0){
-              console.log(user[0])
               request.cookieAuth.set(user[0]);
               return reply({_id: user[0]._id, username: user[0].username, scope: user[0].scope[0]});
             }
@@ -30,7 +28,6 @@ exports.login = {
 exports.logout = {
     auth: false,  
     handler: function(request, reply) {
-      console.log('gothere')
       request.cookieAuth.clear();
       return reply('Logout Successful!');
     }
