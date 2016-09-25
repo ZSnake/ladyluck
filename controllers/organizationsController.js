@@ -129,7 +129,7 @@ exports.getOrganizationById = { //takes only one element by id
 
 exports.createOrganization = {
   auth: {
-      mode:'required',
+      mode:'try',
       strategy:'session',
       scope: ['admin', 'orgUser']
   },
@@ -234,5 +234,27 @@ exports.createOrganization = {
       else  
         boom.badRequest('Invalid query. Organization not created: ', err);
     });
+  }
+}
+
+exports.deleteOrganization = {
+  auth: {
+    mode: 'try',
+    strategy: 'session',
+    scope: ['admin']
+  },
+  handler: function(request, reply){
+    organization.remove({_id: request.params.organizationId}, function(err){
+      if(err)
+        boom.notAcceptable("Can't remove organization")
+
+        
+      project.remove({organizationId: request.params.organizationId}, function(){
+        if(err)
+          boom.notAcceptable("Can't remove the organization's projects");
+
+        return reply("Organization and projects removed")
+      });
+    })
   }
 }
