@@ -241,11 +241,18 @@ exports.createOrganization = {
       scope: ['admin', 'orgUser']
   },
   handler: function(request, reply){
+    console.log(request.payload.ursacRegistrationDate);
+    console.log(request.payload.interviewDate);
+    console.log(request.payload.orgResolutionDate);
+    console.log(request.payload.orgNumber)
+
     if(request.payload.logo){
       var b = new Buffer(request.payload.logo);
       var s = b.toString('base64');
       cloudinary.uploader.upload("data:image/jpg;base64," + s, function(result) { 
         if(result.error){
+          console.log(Object.keys(result.error))
+          console.log('error uploading' + result.error.message)
           boom.notAcceptable('Image could not be uploaded');
         }
           var newOrganization = new organization({
@@ -287,6 +294,7 @@ exports.createOrganization = {
         });
         newOrganization.save(function(err, organization){
           if(!err){
+            console.log('inside callback')
             if(request.payload.projects){
               request.payload.projects.forEach(function(p){
                 var newProject = new project({
@@ -337,6 +345,7 @@ exports.createOrganization = {
                 });
                 newProject.save(function(err){
                   if(err){
+                    console.log('error saving proj: ' + err)
                     boom.notAcceptable('Invalid query. Error saving project: ' + newProject.name, err);
                   }
                 });
@@ -345,6 +354,7 @@ exports.createOrganization = {
             return reply(organization);
           }
           else{  
+            console.log('error saving org' + err);
             boom.notAcceptable('Invalid query. Organization not created: ', err);
           }
         });
