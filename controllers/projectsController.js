@@ -3,13 +3,37 @@ var boom = require('boom');
 
 
 exports.getProjects = {
+	auth: false,
 	handler: function(request, reply){
 		var projects = project.find({organizationId : request.params.organizationId});
 		reply(projects);
 	}
 }
 
+exports.getAllProjects = {
+  auth: false,
+  handler: function(request, reply){
+    var Projects = project.find({});
+    reply(Projects);
+  }
+}
+
+
+exports.deleteProjectsById = {
+	handler: function (request, reply) {
+		
+		var Project= project.remove({_id:request.params.projectId}, function(err){
+			if (err) {boom.notAcceptable("can't delete");
+		} 
+		return reply(request.params.projectId)
+
+	})
+		
+	}
+}
+
 exports.getProjectsById = {
+	auth: false,
 	handler: function (request, reply) {
 		var Project = project.find({_id:request.params.projectId})
 		return reply(Project)
@@ -18,6 +42,11 @@ exports.getProjectsById = {
 }
 
 exports.editProject = {
+	auth: {
+      mode:'required',
+      strategy:'session',
+      scope: ['admin']
+  },
 	handler: function(request, reply) {
 		project.update({_id:request.params.projectId},{$set:{
 			projectNumber : request.payload.projectNumber,	

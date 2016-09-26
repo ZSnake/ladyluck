@@ -28,6 +28,7 @@
   "homepage": "https://github.com/ZSnake/angular-scaffold#readme",
   "dependencies": {
     "boom": "^3.0.0",
+    "cloudinary": "^1.4.3",
     "crypto-js": "^3.1.5",
     "hapi": "^11.1.0",
     "hapi-auth-cookie": "^6.0.0 ",
