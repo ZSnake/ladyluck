@@ -34,7 +34,8 @@ var OrganizationSchema = new mongoose.Schema({
   interviewDate: Date, 	
   interviewTime: String,	
   otherOrgsInRegion: String	,
-  observations: String
+  observations: String,
+  logoUrl: String
 });
 
 module.exports = mongoose.model('Organization', OrganizationSchema);

@@ -6,6 +6,7 @@ var auth = require('hapi-auth-cookie');
 var config = require('./config')
 var server = new hapi.Server();
 var https = require('hapi-require-https');
+var cloudinary = require('cloudinary');
 
 server.connection({
     port: ~~process.env.PORT || 8000,
@@ -28,7 +29,11 @@ server.register([inert, auth, https], function(err){
     ttl: 24 * 60 * 60 * 1000, // Set session to 1 day
     isSecure: false
   });
-
+    cloudinary.config({ 
+        cloud_name: 'dvxiia4du', 
+        api_key: '856997925515926', 
+        api_secret: 'nyCEfWMRi7Qw-iF9d95hw0aWrR0'         
+    });
 	server.route(routes.endpoints);
 
 	server.start(function () {
