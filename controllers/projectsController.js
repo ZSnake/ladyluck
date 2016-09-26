@@ -10,6 +10,15 @@ exports.getProjects = {
 	}
 }
 
+exports.getAllProjects = {
+  auth: false,
+  handler: function(request, reply){
+    var Projects = project.find({});
+    reply(Projects);
+  }
+}
+
+
 exports.deleteProjectsById = {
 	handler: function (request, reply) {
 		
@@ -34,7 +43,7 @@ exports.getProjectsById = {
 
 exports.editProject = {
 	auth: {
-      mode:'required',
+      mode:'try',
       strategy:'session',
       scope: ['admin']
   },

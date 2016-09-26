@@ -13,7 +13,7 @@ exports.getOrganizations = {
 
 exports.editOrganization = {
   auth: {
-      mode:'required',
+      mode:'try',
       strategy:'session',
       scope: ['admin']
   },
