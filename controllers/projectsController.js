@@ -10,6 +10,28 @@ exports.getProjects = {
 	}
 }
 
+exports.getAllProjects = {
+  auth: false,
+  handler: function(request, reply){
+    var Projects = project.find({});
+    reply(Projects);
+  }
+}
+
+
+exports.deleteProjectsById = {
+	handler: function (request, reply) {
+		
+		var Project= project.remove({_id:request.params.projectId}, function(err){
+			if (err) {boom.notAcceptable("can't delete");
+		} 
+		return reply(request.params.projectId)
+
+	})
+		
+	}
+}
+
 exports.getProjectsById = {
 	auth: false,
 	handler: function (request, reply) {

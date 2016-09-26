@@ -11,7 +11,9 @@ exports.endpoints = [{method: 'GET', path: '/', config: {handler: function(reque
 	{method: 'GET', path: '/v1/organization/{organizationId}/projects/', config: projectsController.getProjects},
 	{method: 'PUT', path: '/v1/organization/{organizationId}/project/{projectId}', config: projectsController.editProject},
 	{method: 'GET', path: '/v1/organization/{organizationId}/project/{projectId}', config: projectsController.getProjectsById},//get para editar un projecto
+	{method: 'DELETE', path: '/v1/organization/{organizationId}/project/{projectId}', config: projectsController.deleteProjectsById},//delete projecto individualmente de editOrganization
 	{method: 'GET', path: '/v1/organizations', config: organizationsController.getOrganizations},
+	{method: 'GET', path: '/v1/projects', config: projectsController.getAllProjects},
     {method: 'POST', path: '/v1/organization', config: organizationsController.createOrganization},
 	{method: 'POST', path: '/v1/createUser', config: usersController.createUser},
 	{method: 'POST', path: '/v1/login', config: authController.login},
