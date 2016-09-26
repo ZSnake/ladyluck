@@ -245,8 +245,9 @@ exports.createOrganization = {
     var b = new Buffer(request.payload.logo);
     var s = b.toString('base64');
     cloudinary.uploader.upload("data:image/jpg;base64," + s, function(result) { 
-      if(result.error)
+      if(result.error){
         boom.notAcceptable('Image could not be uploaded');
+      }
       var newOrganization = new organization({
         orgNumber : request.payload.orgNumber, 	
         photo : request.payload.photo,	
@@ -343,8 +344,9 @@ exports.createOrganization = {
           }
           return reply(organization);
         }
-        else  
+        else{  
           boom.notAcceptable('Invalid query. Organization not created: ', err);
+        }
       });
     });
   }
