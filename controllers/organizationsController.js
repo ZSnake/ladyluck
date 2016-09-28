@@ -66,7 +66,8 @@ exports.editOrganization = {
             boom.notAcceptable('Error updating project: ' + error);
           } else {
             if(request.payload.projects){
-              request.payload.projects.forEach(function(p){
+              var projects=JSON.parse(request.payload.projects);
+              projects.forEach(function(p){
                 var newProject = new project({
                   projectNumber: p.projectNumber ,  
                   organizationId: request.params.organizationId, 
@@ -107,7 +108,7 @@ exports.editOrganization = {
                   childrenDinning: p.childrenDinning, 
                   preBasicEducationCenter: p.preBasicEducationCenter, 
                   sportEducationCenter: p.sportEducationCenter, 
-                  alternativeEducationCenter: Boolean,  
+                  alternativeEducationCenter: p.alternativeEducationCenter,  
                   initialEducationAndEarlyEstimulationCenter: p.initialEducationAndEarlyEstimulationCenter, 
                   artisticFormationCenter: p.artisticFormationCenter,
                   vocationalEducationCenter: p.vocationalEducationCenter,
@@ -166,7 +167,8 @@ exports.editOrganization = {
           boom.notAcceptable('Error updating project: ' + err);
         } else {
           if(request.payload.projects){
-            request.payload.projects.forEach(function(p){
+            var projects=JSON.parse(request.payload.projects);
+            projects.forEach(function(p){
               var newProject = new project({
                 projectNumber: p.projectNumber ,  
                 organizationId: request.params.organizationId, 
@@ -207,7 +209,7 @@ exports.editOrganization = {
                 childrenDinning: p.childrenDinning, 
                 preBasicEducationCenter: p.preBasicEducationCenter, 
                 sportEducationCenter: p.sportEducationCenter, 
-                alternativeEducationCenter: Boolean,  
+                alternativeEducationCenter: p.alternativeEducationCenter,  
                 initialEducationAndEarlyEstimulationCenter: p.initialEducationAndEarlyEstimulationCenter, 
                 artisticFormationCenter: p.artisticFormationCenter,
                 vocationalEducationCenter: p.vocationalEducationCenter,
@@ -241,7 +243,10 @@ exports.createOrganization = {
       strategy:'session',
       scope: ['admin', 'orgUser']
   },
+
   handler: function(request, reply){
+    
+    console.log('dasdas');
     var b = new Buffer(request.payload.logo);
     var s = b.toString('base64');
     cloudinary.uploader.upload("data:image/jpg;base64," + s, function(result) { 
@@ -287,7 +292,9 @@ exports.createOrganization = {
       newOrganization.save(function(err, organization){
         if(!err){
           if(request.payload.projects){
-            request.payload.projects.forEach(function(p){
+            var projects=JSON.parse(request.payload.projects);
+
+            projects.forEach(function(p){
               var newProject = new project({
                 projectNumber: p.projectNumber ,	
                 organizationId: organization._id,	
@@ -328,7 +335,7 @@ exports.createOrganization = {
                 childrenDinning: p.childrenDinning,	
                 preBasicEducationCenter: p.preBasicEducationCenter,	
                 sportEducationCenter: p.sportEducationCenter,	
-                alternativeEducationCenter: Boolean,	
+                alternativeEducationCenter: p.alternativeEducationCenter,	
                 initialEducationAndEarlyEstimulationCenter: p.initialEducationAndEarlyEstimulationCenter,	
                 artisticFormationCenter: p.artisticFormationCenter,
                 vocationalEducationCenter: p.vocationalEducationCenter,
