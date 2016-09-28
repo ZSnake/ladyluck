@@ -43,11 +43,12 @@ exports.getProjectsById = {
 
 exports.editProject = {
 	auth: {
-      mode:'required',
+      mode:'try',
       strategy:'session',
       scope: ['admin']
   },
 	handler: function(request, reply) {
+		console.log('estamos chillin en el controller');
 		project.update({_id:request.params.projectId},{$set:{
 			projectNumber : request.payload.projectNumber,	
 			organizationId : request.payload.organizationId,	
