@@ -19,9 +19,11 @@ exports.editOrganization = {
       scope: ['admin']
   },
   handler: function(request, reply){
+    console.log("a ver si esta vacio");
     if(request.payload.logo){
       var b = new Buffer(request.payload.logo);
       var s = b.toString('base64');
+
       cloudinary.uploader.upload("data:image/jpg;base64," + s, function(result) { 
         if(result.error)
           boom.notAcceptable('Image could not be uploaded');
@@ -68,6 +70,8 @@ exports.editOrganization = {
             if(request.payload.projects){
               var projects=JSON.parse(request.payload.projects);
               projects.forEach(function(p){
+                console.log("a ver si esta vacio");
+                console.log(projects.name);
                 var newProject = new project({
                   projectNumber: p.projectNumber ,  
                   organizationId: request.params.organizationId, 
@@ -169,7 +173,11 @@ exports.editOrganization = {
           if(request.payload.projects){
             var projects=JSON.parse(request.payload.projects);
             projects.forEach(function(p){
+              console.log("a ver si esta vacio");
+                console.log(p.name + " nombre");
               var newProject = new project({
+
+                
                 projectNumber: p.projectNumber ,  
                 organizationId: request.params.organizationId, 
                 name: p.name, 
@@ -246,7 +254,7 @@ exports.createOrganization = {
 
   handler: function(request, reply){
     
-    console.log('dasdas');
+    
     var b = new Buffer(request.payload.logo);
     var s = b.toString('base64');
     cloudinary.uploader.upload("data:image/jpg;base64," + s, function(result) { 
