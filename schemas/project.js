@@ -45,7 +45,7 @@ var ProjectSchema = new mongoose.Schema({
     artisticFormationCenter: {type: Boolean, default: false},
     vocationalEducationCenter: {type: Boolean, default: false},
     others: {type: Boolean, default: false},
-    tipologyObservations: String
+    typologyObservations: String
 });
 
 module.exports = mongoose.model('Project', ProjectSchema);

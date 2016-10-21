@@ -19,7 +19,7 @@ exports.editOrganization = {
       scope: ['admin']
   },
   handler: function(request, reply){
-    console.log("a ver si esta vacio");
+    
     if(request.payload.logo){
       var b = new Buffer(request.payload.logo);
       var s = b.toString('base64');
@@ -70,8 +70,8 @@ exports.editOrganization = {
             if(request.payload.projects){
               var projects=JSON.parse(request.payload.projects);
               projects.forEach(function(p){
-                console.log("a ver si esta vacio");
-                console.log(projects.name);
+                
+                
                 var newProject = new project({
                   projectNumber: p.projectNumber ,  
                   organizationId: request.params.organizationId, 
@@ -173,8 +173,7 @@ exports.editOrganization = {
           if(request.payload.projects){
             var projects=JSON.parse(request.payload.projects);
             projects.forEach(function(p){
-              console.log("a ver si esta vacio");
-                console.log(p.name + " nombre");
+            
               var newProject = new project({
 
                 
@@ -303,6 +302,7 @@ exports.createOrganization = {
             var projects=JSON.parse(request.payload.projects);
 
             projects.forEach(function(p){
+              console.log(p.typologyObservations);
               var newProject = new project({
                 projectNumber: p.projectNumber ,	
                 organizationId: organization._id,	
@@ -347,8 +347,10 @@ exports.createOrganization = {
                 initialEducationAndEarlyEstimulationCenter: p.initialEducationAndEarlyEstimulationCenter,	
                 artisticFormationCenter: p.artisticFormationCenter,
                 vocationalEducationCenter: p.vocationalEducationCenter,
-                others: p.others
+                others: p.others,
+                typologyObservations: p.typologyObservations
               });
+              console.log(newProject.typologyObservations);
               newProject.save(function(err){
                 if(err){
                   boom.notAcceptable('Invalid query. Error saving project: ' + newProject.name, err);

@@ -94,7 +94,7 @@ exports.editProject = {
 			artisticFormationCenter : request.payload.artisticFormationCenter,
 			vocationalEducationCenter : request.payload.vocationalEducationCenter,
 			others : request.payload.others,
-			tipologyObservations : request.payload.tipologyObservations
+			typologyObservations : request.payload.typologyObservations
 		}},function(error) {
 			if(error){
 				boom.badRequest('Error updating project: ' + err);
