@@ -2,6 +2,7 @@ var organizationsController = require('./controllers/organizationsController');
 var usersController = require('./controllers/usersController');
 var authController = require('./controllers/authController');
 var projectsController = require('./controllers/projectsController');
+var logsController = require('./controllers/logsController');
 
 exports.endpoints = [{method: 'GET', path: '/', config: {handler: function(request, reply){reply('API v1, DINAF')}}},
 //	{method: 'PUT', path: '/v1/organizations', config: organizationsController.updateOrganizations},
@@ -20,5 +21,7 @@ exports.endpoints = [{method: 'GET', path: '/', config: {handler: function(reque
 	{method: 'GET', path: '/v1/logout', config: authController.logout},
 	{method: 'GET', path: '/v1/users', config: usersController.getUsers},
 	{method: 'DELETE', path: '/v1/user/{userId}', config: usersController.deleteUser},
-	{method: 'PUT', path: '/v1/user/{userId}', config: usersController.editUser}
+	{method: 'PUT', path: '/v1/user/{userId}', config: usersController.editUser},
+	{method: 'POST', path: '/v1/createLog', config: logsController.createLog},
+	{method: 'GET', path: '/v1/logs', config: logsController.getLogs}
 ];

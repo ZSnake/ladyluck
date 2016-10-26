@@ -296,13 +296,18 @@ exports.createOrganization = {
         observations: request.payload.observations,
         logoUrl: result.url
       });
+      
       newOrganization.save(function(err, organization){
+        console.log(request.payload);
+        console.log(err);
         if(!err){
-          if(request.payload.projects){
-            var projects=JSON.parse(request.payload.projects);
 
+          console.log("2");
+          if(request.payload.projects){
+            console.log("3");
+            var projects=JSON.parse(request.payload.projects);
+            console.log("5");
             projects.forEach(function(p){
-              console.log(p.typologyObservations);
               var newProject = new project({
                 projectNumber: p.projectNumber ,	
                 organizationId: organization._id,	
@@ -350,7 +355,7 @@ exports.createOrganization = {
                 others: p.others,
                 typologyObservations: p.typologyObservations
               });
-              console.log(newProject.typologyObservations);
+              
               newProject.save(function(err){
                 if(err){
                   boom.notAcceptable('Invalid query. Error saving project: ' + newProject.name, err);
