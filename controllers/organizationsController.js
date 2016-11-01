@@ -116,6 +116,7 @@ exports.editOrganization = {
                   initialEducationAndEarlyEstimulationCenter: p.initialEducationAndEarlyEstimulationCenter, 
                   artisticFormationCenter: p.artisticFormationCenter,
                   vocationalEducationCenter: p.vocationalEducationCenter,
+                  typologyObservations: p.typologyObservations,
                   others: p.others
                 });
                 newProject.save(function(err){
@@ -220,6 +221,7 @@ exports.editOrganization = {
                 initialEducationAndEarlyEstimulationCenter: p.initialEducationAndEarlyEstimulationCenter, 
                 artisticFormationCenter: p.artisticFormationCenter,
                 vocationalEducationCenter: p.vocationalEducationCenter,
+                typologyObservations: p.typologyObservations,
                 others: p.others
               });
               newProject.save(function(err){
