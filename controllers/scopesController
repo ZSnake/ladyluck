@@ -1,0 +1,85 @@
+var boom = require('boom');
+var scope = require('../schemas/scope');
+
+exports.createScope = {
+  auth: {
+    mode:'try',
+    strategy:'session',
+    scope: ['admin', 'orgUser']
+  },
+  handler: function(request, reply) {
+    console.log(request);
+
+    var newScope = new scope({
+      scope: request.payload.scope,
+      views: request.payload.views
+    });
+    console.log(newScope);
+    newScope.save(function(err, scope){
+      if(!err){
+        return reply(scope);
+      }else  
+      boom.notAcceptable('Invalid query. scope not created: ', err);
+    });
+  }
+};
+
+exports.editScope = {
+  auth: {
+    mode: 'try',
+    strategy: 'session',
+    scope: ['admin']
+  },
+  handler: function(request, reply){
+    var updateScope = {};
+    
+    updateScope = {$set: {
+      scope: request.payload.scope,
+      views: request.payload.views
+    }
+  }
+  console.log(updateScope);
+  scope.update({_id: request.params.scopeId},updateScope, function(err){
+    if(err)
+      boom.notAcceptable('User could not be updated: '+ err);
+    reply('scope modified');
+  })
+}
+};
+
+
+
+
+exports.getScopes = {
+  auth: {
+    mode: 'try',
+    strategy: 'session'
+  },
+  handler: function(request, reply){    
+    var scopes = scope.find({});
+    reply(scopes);
+  }
+};
+
+exports.getScopebyId = { //takes only one element by id
+  handler: function(request, reply) {
+    console.log(request.params.scopeId);
+    var Scope = scope.find({_id:request.params.scopeId})
+    return reply(Scope);
+  }
+};
+
+  exports.deleteScope = {
+    auth: {
+      mode: 'try',
+      strategy: 'session',
+      scope: ['admin']
+    },
+    handler: function(request, reply){
+      scope.remove({_id: request.params.scopeId}, function(err){
+        if(err)
+          boom.notAcceptable('Scope could not be deleted ' + err);
+        reply('scope removed');
+      });
+    }
+  };
