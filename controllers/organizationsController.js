@@ -16,7 +16,7 @@ exports.editOrganization = {
   auth: {
       mode:'try',
       strategy:'session',
-      scope: ['admin']
+      //scope: ['admin']
   },
   handler: function(request, reply){
     
@@ -250,7 +250,7 @@ exports.createOrganization = {
   auth: {
       mode:'try',
       strategy:'session',
-      scope: ['admin', 'orgUser']
+      //scope: ['admin', 'orgUser']
   },
 
   handler: function(request, reply){
@@ -378,7 +378,7 @@ exports.deleteOrganization = {
   auth: {
     mode: 'try',
     strategy: 'session',
-    scope: ['admin']
+    //scope: ['admin']
   },
   handler: function(request, reply){
     organization.remove({_id: request.params.organizationId}, function(err){

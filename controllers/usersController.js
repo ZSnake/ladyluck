@@ -27,7 +27,7 @@ exports.createUser = {
     auth: {
       mode: 'try',
       strategy: 'session',
-      scope: ['admin']
+      //scope: ['admin']
     },
     handler: function(request, reply){
       user.find({}, 'username _id scope', function(err, result){
@@ -43,7 +43,7 @@ exports.createUser = {
     auth: {
       mode: 'try',
       strategy: 'session',
-      scope: ['admin']
+      //scope: ['admin']
     },
     handler: function(request, reply){
       user.remove({_id: request.params.userId}, function(err){
@@ -58,7 +58,7 @@ exports.createUser = {
     auth: {
       mode: 'try',
       strategy: 'session',
-      scope: ['admin']
+      //scope: ['admin']
     },
     handler: function(request, reply){
       var updateArgument = {};

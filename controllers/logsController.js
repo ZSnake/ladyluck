@@ -5,7 +5,7 @@ exports.createLog = {
   auth: {
       mode:'try',
       strategy:'session',
-      scope: ['admin', 'orgUser']
+      //scope: ['admin', 'orgUser']
   },
   handler: function(request, reply) {
     var newLog = new log({

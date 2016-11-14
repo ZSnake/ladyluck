@@ -5,7 +5,7 @@ exports.createScope = {
   auth: {
     mode:'try',
     strategy:'session',
-    scope: ['admin', 'orgUser']
+    //scope: ['admin', 'orgUser']
   },
   handler: function(request, reply) {
     console.log(request);
@@ -28,7 +28,7 @@ exports.editScope = {
   auth: {
     mode: 'try',
     strategy: 'session',
-    scope: ['admin']
+    //scope: ['admin']
   },
   handler: function(request, reply){
     var updateScope = {};
@@ -55,8 +55,10 @@ exports.getScopes = {
     mode: 'try',
     strategy: 'session'
   },
-  handler: function(request, reply){    
+  handler: function(request, reply){  
+
     var scopes = scope.find({});
+    console.log(scopes)  
     reply(scopes);
   }
 };
@@ -73,7 +75,7 @@ exports.getScopebyId = { //takes only one element by id
     auth: {
       mode: 'try',
       strategy: 'session',
-      scope: ['admin']
+      //scope: ['admin']
     },
     handler: function(request, reply){
       scope.remove({_id: request.params.scopeId}, function(err){
