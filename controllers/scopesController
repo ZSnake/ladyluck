@@ -8,13 +8,13 @@ exports.createScope = {
     //scope: ['admin', 'orgUser']
   },
   handler: function(request, reply) {
-    console.log(request);
+    //console.log(request);
 
     var newScope = new scope({
       scope: request.payload.scope,
       views: request.payload.views
     });
-    console.log(newScope);
+    //console.log(newScope);
     newScope.save(function(err, scope){
       if(!err){
         return reply(scope);
@@ -38,7 +38,7 @@ exports.editScope = {
       views: request.payload.views
     }
   }
-  console.log(updateScope);
+ // //console.log(updateScope);
   scope.update({_id: request.params.scopeId},updateScope, function(err){
     if(err)
       boom.notAcceptable('User could not be updated: '+ err);
@@ -58,14 +58,14 @@ exports.getScopes = {
   handler: function(request, reply){  
 
     var scopes = scope.find({});
-    console.log(scopes)  
+  //  //console.log(scopes)  
     reply(scopes);
   }
 };
 
 exports.getScopebyId = { //takes only one element by id
   handler: function(request, reply) {
-    console.log(request.params.scopeId);
+    //console.log(request.params.scopeId);
     var Scope = scope.find({_id:request.params.scopeId})
     return reply(Scope);
   }

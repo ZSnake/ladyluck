@@ -62,23 +62,31 @@ exports.createUser = {
     },
     handler: function(request, reply){
       var updateArgument = {};
+      
       if(request.payload.password){
         updateArgument = {$set: {
                                   username: request.payload.username,
                                   password: SHA3(request.payload.password),
-                                  scope: request.payload.scope
+                                  scope: request.payload.scope,
+                                  flog: true
                                 }
                         }
       }else{
         updateArgument = {$set: {
                                   username: request.payload.username,
-                                  scope: request.payload.scope
+                                  scope: request.payload.scope,
+                                  flog: true
                                 }
                           }
       }
-      user.update({_id: request.params.userId},updateArgument, function(err){
-        if(err)
+
+      console.log(request.payload.userId);
+      console.log(request.params.userId);
+      user.update({_id: request.payload.userId},updateArgument, function(err){
+        if(err){
+          console.log(err)
           boom.notAcceptable('User could not be updated: '+ err);
+        }
         reply('user modified');
       })
     }

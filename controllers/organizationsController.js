@@ -300,15 +300,15 @@ exports.createOrganization = {
       });
       
       newOrganization.save(function(err, organization){
-        console.log(request.payload);
-        console.log(err);
+       // //console.log(request.payload);
+       // //console.log(err);
         if(!err){
 
-          console.log("2");
+        //  //console.log("2");
           if(request.payload.projects){
-            console.log("3");
+            //console.log("3");
             var projects=JSON.parse(request.payload.projects);
-            console.log("5");
+            //console.log("5");
             projects.forEach(function(p){
               var newProject = new project({
                 projectNumber: p.projectNumber ,	

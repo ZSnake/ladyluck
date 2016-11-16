@@ -48,7 +48,7 @@ exports.editProject = {
       scope: ['admin']
   },
 	handler: function(request, reply) {
-		console.log('estamos chillin en el controller');
+		//console.log('estamos chillin en el controller');
 		project.update({_id:request.params.projectId},{$set:{
 			projectNumber : request.payload.projectNumber,	
 			organizationId : request.payload.organizationId,	

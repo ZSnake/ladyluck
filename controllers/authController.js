@@ -17,7 +17,7 @@ exports.login = {
           if(!err){
             if(user.length > 0){
               request.cookieAuth.set(user[0]);
-              return reply({_id: user[0]._id, username: user[0].username, scope: user[0].scope[0]});
+              return reply({_id: user[0]._id, username: user[0].username, scope: user[0].scope[0], flog: user[0].flog});
             }
             return reply(boom.unauthorized('Wrong email or password'));
           }
